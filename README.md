@@ -5,7 +5,7 @@
 
 > Download profile picture of any facebook user, even if you are blocked by him/her.
 
-> Condition : Do remeber the facebook user name so that you can find the user id.
+__NOTE__ : Do remeber the facebook user name so that you can find the user id.
 
 ## Install
 
