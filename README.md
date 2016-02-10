@@ -1,5 +1,5 @@
 <h1 align="center">
-<img width="360" height="165" src="http://rishigiri.com/github/fbimg.svg"></img>
+<img width="720" height="330" src="http://rishigiri.com/github/fbimg.svg"></img>
 <br>
 </h1>
 
