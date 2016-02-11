@@ -1,0 +1,52 @@
+{
+  "name": "image-of",
+  "version": "1.0.0",
+  "description": "Download profile picture of any facebook user.",
+  "license": "MIT",
+  "repository": "CodeDotJS/image-of",
+  "author": {
+    "name": "Rishi Giri",
+    "email": "rushforlinux@gmail.com",
+    "url": "rishigiri.com"
+  },
+  "bin": {
+    "image-of": "cli.js"
+  },
+  "engines": {
+    "node": ">=4"
+  },
+  "scripts": {
+    "test": "xo && ava"
+  },
+  "files": [
+    "cli.js"
+  ],
+  "keywords": [
+    "cli-app",
+    "cli",
+    "image",
+    "image-of",
+    "terminal",
+    "term",
+    "console",
+    "download",
+    "graph",
+    "picture",
+    "facebook-id-of"
+  ],
+  "dependencies": {
+    "fs": "*",
+    "url": "*",
+    "follow-redirects": "*",
+    "colors": "*",
+    "yargs": "*"
+  },
+  "devDependencies": {
+    "ava": "*",
+    "execa": "^0.2.2",
+    "xo": "*"
+  },
+  "xo": {
+    "esnext": true
+  }
+}
