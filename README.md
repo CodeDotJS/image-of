@@ -10,6 +10,8 @@ __NOTE__ : Do remeber the facebook user name so that you can find the user id.
 ## Install
 
 ```
+$ npm install --global facebook-id-of
+
 $ npm install --global image-of
 ```
 
