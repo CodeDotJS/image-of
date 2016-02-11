@@ -18,6 +18,8 @@ $ npm install --global image-of
 ## Usage
 
 ```
+$ facebook-id-of -u [/user.name] [GET THE USER ID]
+
 $ image-of -u /USER.ID -n /file.name
 
   Usage
@@ -26,11 +28,12 @@ $ image-of -u /USER.ID -n /file.name
 
               Options:
 
-                 -u      user id                                        [required]
+                 -u      user id [obtained from facebook-id-of]         [required]
+
                  -n      save image as [ 23423984792834 ]               [required]
 
 
-    $ image-of -u '/user.id' -n 'rishi.jpg'
+    $ image-of -u '/user.id' -n 'unicorn.jpg'
 
     Status Code : 200
     Please wait! Download in progress.
