@@ -46,7 +46,7 @@ $ image-of -u /USER.ID -n /file.name
 
 ## Related
 
-Image of [Image-of](https://github.com/CodeDotJS/image-of)
+Facebook-id-of [Facebook-Id](https://github.com/CodeDotJS/facebook-id-of)
 
 
 ## License
