@@ -3,7 +3,7 @@
 <br>
 </h1>
 
-> Download profile picture of any facebook user, even if you are blocked by him/her.
+> Download profile picture of any facebook user.
 
 __NOTE__ : Do remeber the facebook user name so that you can find the user id.
 
