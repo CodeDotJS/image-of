@@ -29,17 +29,11 @@ const argv = require('yargs')
     .describe('n', 'File name')
     .argv;
 
-const userName = exec("whoami", function(error, stdout, stderr) {
-    var gotName = stdout;
-    var getName = gotName.toString();
-    console.log(getName);
-    var DOWNLOAD_DIR = '/home/',
-        +getName + '/Downloads/FB';
-    var mkdir = 'mkdir -p ' + DOWNLOAD_DIR;
-    var child = exec(mkdir, function(err, stdout, stderr) {
-        if (err) throw err;
-    });
-    if (error !== null) {
-        console.log('exec error: ' + error);
-    }
+var file = fs.createWriteStream(argv.n);
+
+var start_downlaod = http.get('http://graph.facebook.com/' + argv.u + '/picture?width=200', function(res) {
+    res.pipe(file);
+}).on('error', function(err) {
+    console.error(err);
+    console.log(image_url + ' downloaded to ' + image_in);
 });
