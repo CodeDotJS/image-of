@@ -5,8 +5,6 @@
 const fs = require('fs');
 const url = require('url');
 const http = require('follow-redirects').http;
-const exec = require('child_process').exec;
-const spawn = require('child_process').spawn;
 
 const colors = require('colors');
 
@@ -29,9 +27,9 @@ const argv = require('yargs')
     .describe('n', 'File name')
     .argv;
 
-var file = fs.createWriteStream(argv.n);
+var file = fs.createWriteStream(argv.n+".jpg");
 
-var start_downlaod = http.get('http://graph.facebook.com/' + argv.u + '/picture?width=200', function(res) {
+var start_downlaod = http.get('http://graph.facebook.com/' + argv.u + '/picture?width=800', function(res) {
     res.pipe(file);
 }).on('error', function(err) {
     console.error(err);
