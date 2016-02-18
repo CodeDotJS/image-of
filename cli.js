@@ -7,7 +7,6 @@ const url = require('url');
 const http = require('follow-redirects').http;
 const https = require('follow-redirects').https;
 const colors = require('colors');
-const mkdirp = require('mkdirp');
 
 colors.setTheme({
     error: ['red', 'bold']
@@ -28,17 +27,12 @@ const argv = require('yargs')
     .describe('n', 'File name')
     .argv;
     
-var image_in = mkdirp('/home/rishi/Downloads/Facebook_Images', function (err) {
-    if (err) console.error(err)
-    else console.log('pow!')
-});
-
+console.log("Please Wait")
 var file = fs.createWriteStream(argv.n+".jpg");
 
-var start_downlaod = http.get('http://graph.facebook.com/' + argv.u + '/picture?width=800', function(res) {
+var start_downlaod = http.get('http://graph.facebook.com/' + argv.u + '/picture?width=80', function(res) {
     res.pipe(file);
+    console.log('Done');
 }).on('error', function(err) {
     console.error(err);
 });
-
-fs.mkdirSync(path, mode);
