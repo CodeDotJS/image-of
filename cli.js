@@ -3,11 +3,8 @@
 'use strict';
 
 const fs = require('fs');
-
 const http = require('follow-redirects').http;
-
 const mkdirp = require('mkdirp');
-
 const colors = require('colors');
 
 colors.setTheme({

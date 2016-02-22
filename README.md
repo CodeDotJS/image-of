@@ -22,6 +22,8 @@ $ facebook-id-of -u [/user.name] [GET THE USER ID]
 
 $ image-of -u /USER.ID -n /file.name
 
+__NOTE__ : You don't need to write any extension for the image you are downloading.
+
   Usage
 
     $ image-of
@@ -30,12 +32,11 @@ $ image-of -u /USER.ID -n /file.name
 
                  -u      user id [obtained from facebook-id-of]         [required]
 
-                 -n      save image as [ 23423984792834 ]               [required]
+                 -n      save image as [ unicorn ]               [required]
 
 
-    $ image-of -u '/user.id' -n 'unicorn.jpg'
+    $ image-of -u '/user.id' -n unicorn 
 
-    Status Code : 200
     Please wait! Download in progress.
     DONE!
 
