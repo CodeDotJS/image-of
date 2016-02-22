@@ -15,6 +15,8 @@ $ npm install --global facebook-id-of
 $ npm install --global image-of
 ```
 
+__NOTE__ : You don't need to write any extension for the image you are downloading.
+
 ## Usage
 
 ```
@@ -22,7 +24,6 @@ $ facebook-id-of -u [/user.name] [GET THE USER ID]
 
 $ image-of -u /USER.ID -n /file.name
 
-__NOTE__ : You don't need to write any extension for the image you are downloading.
 
   Usage
 
