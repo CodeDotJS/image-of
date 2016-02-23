@@ -39,9 +39,10 @@ mkdirp(imageIn, function (err) {
 });
 
 console.log('\n\tDownload in Progress');
+
 const file = fs.createWriteStream(imageIn + argv.n + '.jpg');
 
-http.get('http://graph.facebook.com/' + argv.u + '/picture?width=160', function (res) {
+http.get('http://graph.facebook.com/' + argv.u + '/picture?width=800', function (res) {
 	res.pipe(file);
 	console.log('\n\tImage Saved\n');
 }).on('error', function (err) {
