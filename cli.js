@@ -29,12 +29,15 @@ const argv = require('yargs')
 const imageIn = './Images/';
 
 mkdirp(imageIn, function (err) {
-    if (err) console.error(err)
-    else console.log('pow!')
+	if (err) {
+		console.error(err);
+	}	else {
+		console.log('pow!');
+	}
 });
 
 console.log('Please Wait');
-const file = fs.createWriteStream(imageIn + argv.n + ".jpg");
+const file = fs.createWriteStream(imageIn + argv.n + '.jpg');
 http.get('http://graph.facebook.com/' + argv.u + '/picture?width=160', function (res) {
 	res.pipe(file);
 	console.log('Done');
