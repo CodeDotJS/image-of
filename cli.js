@@ -28,20 +28,22 @@ const argv = require('yargs')
 
 const imageIn = './Images/';
 
+const removeSlash = imageIn.replace('./', '');
+
 mkdirp(imageIn, function (err) {
 	if (err) {
 		console.error(err);
 	}	else {
-		console.log('pow!');
+		console.log('\n\tDirectory Created : ' + removeSlash);
 	}
 });
 
-console.log('Please Wait');
+console.log('\n\tDownload in Progress');
 const file = fs.createWriteStream(imageIn + argv.n + '.jpg');
 
 http.get('http://graph.facebook.com/' + argv.u + '/picture?width=160', function (res) {
 	res.pipe(file);
-	console.log('Done');
+	console.log('\n\tImage Saved\n');
 }).on('error', function (err) {
 	console.error(err);
 });
