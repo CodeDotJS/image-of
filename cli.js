@@ -38,6 +38,7 @@ mkdirp(imageIn, function (err) {
 
 console.log('Please Wait');
 const file = fs.createWriteStream(imageIn + argv.n + '.jpg');
+
 http.get('http://graph.facebook.com/' + argv.u + '/picture?width=160', function (res) {
 	res.pipe(file);
 	console.log('Done');
