@@ -39,6 +39,7 @@
     "url": "*",
     "follow-redirects": "*",
     "colors": "*",
+    "mkdirp": "*",
     "yargs": "*"
   },
   "devDependencies": {
