@@ -31,15 +31,19 @@ $ image-of -u /USER.ID -n /file.name
 
               Options:
 
-                 -u      user id [obtained from facebook-id-of]         [required]
+                 -u    user id [obtained from facebook-id-of]  [required]
 
-                 -n      save image as [ unicorn ]               [required]
+                 -n    save image as [ unicorn ]               [required]
 
 
     $ image-of -u '/user.id' -n unicorn 
 
-    Please wait! Download in progress.
-    DONE!
+    ❭ Downloading 			:	✔
+
+	❭ Directory Created 	:	✔
+
+	❭ Image Saved in 		: 	Images ❭❭ unicorn.jpg
+
 
 ```
 ## Screenshot
