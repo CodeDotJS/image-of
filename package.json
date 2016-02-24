@@ -3,12 +3,11 @@
   "version": "1.0.0",
   "description": "Download profile picture of any facebook user.",
   "license": "MIT",
-  "repository": "CodeDotJS/image-of",
-  "author": {
-    "name": "Rishi Giri",
-    "email": "rushforlinux@gmail.com",
-    "url": "rishigiri.com"
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codedotjs/image-of.git"
   },
+  "author": "Rishi Giri <rushforlinux@gmail.com> (rishigiri.com)",
   "bin": {
     "image-of": "cli.js"
   },
@@ -49,5 +48,10 @@
   },
   "xo": {
     "esnext": true
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/codedotjs/image-of/issues"
+  },
+  "homepage": "https://github.com/codedotjs/image-of#readme",
+  "main": "cli.js"
 }
