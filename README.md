@@ -48,7 +48,7 @@ $ image-of -u /USER.ID -n /file.name
 ```
 ## Screenshot
 
-<img src="http://rishigiri.com/github/soon.png" alt="">
+<img src="http://rishigiri.com/github/image-of.png" alt="">
 
 ## Related
 
