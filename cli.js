@@ -20,36 +20,40 @@ colors.setTheme({
 });
 
 const argv = require('yargs')
-  .usage('\nUsage : $0 -u [/user.id] -n [file name]'.info)
-  .demand(['u', 'n'])
-  .describe('u', 'ID of facebook user')
-  .describe('n', 'File name')
-  .argv;
+	.usage('\nUsage : $0 -u [/user.id] -n [file name]'.info)
+	.demand(['u', 'n'])
+	.describe('u', 'ID of facebook user')
+	.describe('n', 'File name')
+	.argv;
 
 const imageIn = './Images/';
 
 const removeSlash = imageIn.replace('./', '');
 
-const removeDot = removeSlash.replace('/',''); // because I don't want to.
+const removeDot = removeSlash.replace('/', ''); // because I don't want to.
 
 mkdirp(imageIn, function (err) {
 	if (err) {
 		console.error(err);
-	}	else {
+	} else {
 		console.log('\n\t ❭ Directory Created 	:'.directory + '	✔'.normal);
 	}
 });
 
-setTimeout(function() { console.log('\n\t ❭ Downloading 		:'.directory + '	✔'.normal) }, 2000);
+setTimeout(function () {
+	console.log('\n\t ❭ Downloading 		:'.directory + '	✔'.normal);
+}, 2000);
 
 const file = fs.createWriteStream(imageIn + argv.n + '.jpg');
 
-const fileName = file;
-setTimeout(function() { console.log('\n\t ❭ In Progress 		:'.directory + '	✔'.normal) }, 3500);
+setTimeout(function () {
+	console.log('\n\t ❭ In Progress 		:'.directory + '	✔'.normal);
+}, 3500);
 http.get('http://graph.facebook.com/' + argv.u + '/picture?width=1600', function (res) {
 	res.pipe(file);
-	console.log('\n\t ❭ Image Saved in 	: '.directory + '	' +removeDot.toString().normal + ' ❭❭ ' + argv.n.toString().normal +'.jpg'.normal+'\n');
+	setTimeout(function () {
+		console.log('\n\t ❭ Image Saved in 	: '.directory + '	' + removeDot.toString().normal + ' ❭❭ ' + argv.n.toString().normal + '.jpg'.normal + '\n');
+	}, 4000);
 }).on('error', function (err) {
 	console.error(err);
 });
-
