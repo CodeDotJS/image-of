@@ -8,7 +8,7 @@ const mkdirp = require('mkdirp');
 const colors = require('colors');
 
 colors.setTheme({
-	directory: ['yellow', 'bold']
+	directory: ['cyan', 'bold']
 });
 
 colors.setTheme({
@@ -30,21 +30,24 @@ const imageIn = './Images/';
 
 const removeSlash = imageIn.replace('./', '');
 
+const removeDot = removeSlash.replace('/',''); // because I don't want to.
+
 mkdirp(imageIn, function (err) {
 	if (err) {
 		console.error(err);
 	}	else {
-		console.log('\n\tDirectory Created : '.directory + removeSlash.toString().normal);
+		console.log('\n\t ❭ Directory Created 	:'.directory + '	✔'.normal);
 	}
 });
 
-console.log('\n\tDownload Progress'.directory);
+console.log('\n\t ❭ Downloading 		:'.directory + '	✔'.normal);
 
 const file = fs.createWriteStream(imageIn + argv.n + '.jpg');
 
-http.get('http://graph.facebook.com/' + argv.u + '/picture?width=800', function (res) {
+const fileName = file;
+http.get('http://graph.facebook.com/' + argv.u + '/picture?width=100', function (res) {
 	res.pipe(file);
-	console.log('\n\tImage Saved\n'.directory);
+	console.log('\n\t ❭ Image Saved in 	: '.directory + '	' +removeDot.toString().normal + ' ❭❭ ' + argv.n.toString().normal +'.jpg'.normal+'\n');
 }).on('error', function (err) {
 	console.error(err);
 });
