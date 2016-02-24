@@ -45,6 +45,7 @@ setTimeout(function() { console.log('\n\t ❭ Downloading 		:'.directory + '	✔
 const file = fs.createWriteStream(imageIn + argv.n + '.jpg');
 
 const fileName = file;
+setTimeout(function() { console.log('\n\t ❭ In Progress 		:'.directory + '	✔'.normal) }, 3500);
 http.get('http://graph.facebook.com/' + argv.u + '/picture?width=1600', function (res) {
 	res.pipe(file);
 	console.log('\n\t ❭ Image Saved in 	: '.directory + '	' +removeDot.toString().normal + ' ❭❭ ' + argv.n.toString().normal +'.jpg'.normal+'\n');
