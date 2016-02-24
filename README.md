@@ -38,9 +38,9 @@ $ image-of -u /USER.ID -n /file.name
 
     $ image-of -u '/user.id' -n unicorn 
 
-    ❭ Downloading 			: 	✔
+    	❭ Downloading 			: 	✔
 
-	❭ Directory Created 	:	✔
+	❭ Directory Created 		:	✔
 
 	❭ Image Saved in 		: 	Images ❭❭ unicorn.jpg
 
