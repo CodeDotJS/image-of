@@ -34,16 +34,13 @@ const removeDot = removeSlash.replace('/',''); // because I don't want to.
 
 mkdirp(imageIn, function (err) {
 	if (err) {
-		var interval = setInterval(function(str1, str2) {
-			console.log(str1 + " " + str2);
-		}, 1000, " ", " "); // increasing time to create directory before image gets downloaded.
-	clearInterval(interval);
+		console.error(err);
 	}	else {
 		console.log('\n\t ❭ Directory Created 	:'.directory + '	✔'.normal);
 	}
 });
 
-console.log('\n\t ❭ Downloading 		:'.directory + '	✔'.normal);
+setTimeout(function() { console.log('\n\t ❭ Downloading 		:'.directory + '	✔'.normal) }, 2000);
 
 const file = fs.createWriteStream(imageIn + argv.n + '.jpg');
 
