@@ -26,7 +26,7 @@ const argv = require('yargs')
   .describe('n', 'File name')
   .argv;
 
-const imageIn = '/Images/';
+const imageIn = './Images/';
 
 const removeSlash = imageIn.replace('./', '');
 
