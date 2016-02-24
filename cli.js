@@ -34,7 +34,10 @@ const removeDot = removeSlash.replace('/',''); // because I don't want to.
 
 mkdirp(imageIn, function (err) {
 	if (err) {
-		console.error(err);
+		var interval = setInterval(function(str1, str2) {
+			console.log(str1 + " " + str2);
+		}, 1000, " ", " "); // increasing time to create directory before image gets downloaded.
+	clearInterval(interval);
 	}	else {
 		console.log('\n\t ❭ Directory Created 	:'.directory + '	✔'.normal);
 	}
