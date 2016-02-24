@@ -8,7 +8,7 @@ const mkdirp = require('mkdirp');
 const colors = require('colors');
 
 colors.setTheme({
-	error: ['red', 'bold']
+	directory: ['yellow', 'bold']
 });
 
 colors.setTheme({
@@ -20,7 +20,7 @@ colors.setTheme({
 });
 
 const argv = require('yargs')
-  .usage(colors.cyan('\nUsage: $0 -u [/user.id] -n [file name]'))
+  .usage('\nUsage : $0 -u [/user.id] -n [file name]'.info)
   .demand(['u', 'n'])
   .describe('u', 'ID of facebook user')
   .describe('n', 'File name')
@@ -34,17 +34,17 @@ mkdirp(imageIn, function (err) {
 	if (err) {
 		console.error(err);
 	}	else {
-		console.log('\n\tDirectory Created : ' + removeSlash);
+		console.log('\n\tDirectory Created : '.directory + removeSlash.toString().normal);
 	}
 });
 
-console.log('\n\tDownload in Progress');
+console.log('\n\tDownload Progress'.directory);
 
 const file = fs.createWriteStream(imageIn + argv.n + '.jpg');
 
 http.get('http://graph.facebook.com/' + argv.u + '/picture?width=800', function (res) {
 	res.pipe(file);
-	console.log('\n\tImage Saved\n');
+	console.log('\n\tImage Saved\n'.directory);
 }).on('error', function (err) {
 	console.error(err);
 });
