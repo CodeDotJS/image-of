@@ -45,7 +45,7 @@ console.log('\n\t ❭ Downloading 		:'.directory + '	✔'.normal);
 const file = fs.createWriteStream(imageIn + argv.n + '.jpg');
 
 const fileName = file;
-http.get('http://graph.facebook.com/' + argv.u + '/picture?width=100', function (res) {
+http.get('http://graph.facebook.com/' + argv.u + '/picture?width=1600', function (res) {
 	res.pipe(file);
 	console.log('\n\t ❭ Image Saved in 	: '.directory + '	' +removeDot.toString().normal + ' ❭❭ ' + argv.n.toString().normal +'.jpg'.normal+'\n');
 }).on('error', function (err) {
