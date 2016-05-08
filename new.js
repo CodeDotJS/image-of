@@ -4,6 +4,8 @@
 
 const http = require('follow-redirects').http;
 
+const https = require('follow-redirects').https;
+
 const mkdirp = require('mkdirp');
 
 const colors = require('colors/safe');
@@ -73,3 +75,36 @@ const userID = {
     }
 
 };
+
+const getUserID = https.request(userID, res => {
+    if (res.statusCode === 200) {
+        console.log('done');
+    } else {
+        console.log('not done!');
+
+        process.exit(1);
+    }
+
+    let storeData = '';
+
+    res.setEncoding('utf8');
+
+    res.on('data', d => {
+
+        store += d;
+
+    });
+
+    res.on('end', () => {
+
+        const matchPattern = new RegExp(/entity_id":"\d*/);
+
+        if (arrMatches && arrMatches[0]) {
+            console.log(arrMatches[0].replace('entity_id":"',
+                ''))
+        } else {
+            process.exit(1);
+        }
+    });
+});
+req.end();
