@@ -76,35 +76,55 @@ const userID = {
 
 };
 
-const getUserID = https.request(userID, res => {
-    if (res.statusCode === 200) {
-        console.log('done');
-    } else {
-        console.log('not done!');
+const fileName = 'ProfileImage';
 
+mkdirp(fileName, err => {
+    if (err) {
+        console.error(err);
         process.exit(1);
+    } else {
+        console.log('Direcotry Created');
     }
+});
 
-    let storeData = '';
-
-    res.setEncoding('utf8');
-
-    res.on('data', d => {
-
-        store += d;
-
-    });
-
-    res.on('end', () => {
-
-        const matchPattern = new RegExp(/entity_id":"\d*/);
-
-        if (arrMatches && arrMatches[0]) {
-            console.log(arrMatches[0].replace('entity_id":"',
-                ''))
+if (argv.i) {
+    const getUserID = https.request(userID, res => {
+        if (res.statusCode === 200) {
+            console.log('user found');
         } else {
+            console.log('not done!');
+
             process.exit(1);
         }
+
+        let storeData = '';
+
+        res.setEncoding('utf8');
+
+        res.on('data', d => {
+
+            storeData += d;
+
+        });
+
+        res.on('end', () => {
+
+            const matchPattern = new RegExp(/entity_id":"\d*/);
+
+            const arrMatches = storeData.match(matchPattern);
+
+            if (arrMatches && arrMatches[0]) {
+                console.log(arrMatches[0].replace(
+                    'entity_id":"',
+                    ''))
+            } else {
+                process.exit(1);
+            }
+        });
     });
-});
-req.end();
+    getUserID.end();
+}
+
+if (argv.u) {
+    const file = fs.createWriteStream()
+}
