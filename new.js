@@ -6,6 +6,8 @@ const http = require('follow-redirects').http;
 
 const https = require('follow-redirects').https;
 
+const fs = require('fs');
+
 const mkdirp = require('mkdirp');
 
 const colors = require('colors/safe');
@@ -76,9 +78,9 @@ const userID = {
 
 };
 
-const fileName = 'ProfileImage';
+const folderName = './Image/';
 
-mkdirp(fileName, err => {
+mkdirp(folderName, err => {
     if (err) {
         console.error(err);
         process.exit(1);
@@ -114,17 +116,20 @@ if (argv.i) {
             const arrMatches = storeData.match(matchPattern);
 
             if (arrMatches && arrMatches[0]) {
-                console.log(arrMatches[0].replace(
-                    'entity_id":"',
-                    ''))
+                const getID = arrMatches[0].replace('entity_id":"', '');
+
+                const getImageIn = fs.createWriteStream(folderName + argv.n + '.jpg');
+                http.get('http://graph.facebook.com/' + getID +'/picture?width=1600', res => {
+                        res.pipe(getImageIn);
+                        console.log('image saved');
+                    }).on('error', err => {
+                    console.error(err);
+                    process.exit(1);
+                });
             } else {
                 process.exit(1);
             }
         });
     });
     getUserID.end();
-}
-
-if (argv.u) {
-    const file = fs.createWriteStream()
 }
