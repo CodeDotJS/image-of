@@ -77,10 +77,6 @@ $ image-of -u 4 -n zuck
 	$ image-of -u 4 -n zuck [ right ]
 ```
 
-## Screenshot
-
-<img src="https://raw.githubusercontent.com/rishigiridotcom/rishigiri.com/17afbe956c70ad6fbb668b14acd371fc3251529e/github/image-of.png" alt="">
-
 ## Related
  
  - [instavim](https://github.com/CodeDotJS/instavim) : Complete Instagram media downloader.
