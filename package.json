@@ -39,6 +39,7 @@
     "follow-redirects": "*",
     "colors": "*",
     "mkdirp": "*",
+    "update-notifier": "*",
     "yargs": "*"
   },
   "devDependencies": {
