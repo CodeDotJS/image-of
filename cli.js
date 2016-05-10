@@ -2,60 +2,125 @@
 
 'use strict';
 
-const fs = require('fs');
 const http = require('follow-redirects').http;
+
+const https = require('follow-redirects').https;
+
+const fs = require('fs');
+
 const mkdirp = require('mkdirp');
-const colors = require('colors');
 
-colors.setTheme({
-	directory: ['cyan', 'bold']
-});
-
-colors.setTheme({
-	info: ['cyan', 'bold']
-});
-
-colors.setTheme({
-	normal: ['green', 'bold']
-});
+const colors = require('colors/safe');
 
 const argv = require('yargs')
-	.usage('\nUsage : $0 -u [/user.id] -n [file name]'.info)
-	.demand(['u', 'n'])
-	.describe('u', 'ID of facebook user')
-	.describe('n', 'File name')
-	.argv;
 
-const imageIn = './Images/';
+.usage(colors.cyan.bold('\nUsage : $0 -u <command> [info] <command> [file]'))
 
-const removeSlash = imageIn.replace('./', '');
+.command('u', colors.cyan.bold('❱ ') + 'facebook user\'s username')
 
-const removeDot = removeSlash.replace('/', ''); // because I don't want to.
+.command('i', colors.cyan.bold('❱ ') + 'facebook user\'s user-id')
 
-mkdirp(imageIn, err => {
+.demand(['n'])
+
+.describe('n', colors.cyan.bold('❱ ') + 'save image as')
+
+.argv;
+
+const updateNotifier = require('update-notifier');
+
+const pkg = require('./package.json');
+
+updateNotifier({pkg}).notify();
+
+const userID = {
+	hostname: 'www.facebook.com',
+
+	port: 443,
+
+	path: '/' + argv.i,
+
+	method: 'GET',
+
+	headers: {
+		'accept': 'text/html,application/json,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+
+		'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36',
+
+		'Host': 'www.facebook.com',
+
+		'Connection': 'Keep-Alive',
+
+		'Accept-Language': 'en-GB,en-US;q=0.8,en;q=0.6'
+	}
+};
+
+const folderName = './Image/';
+
+mkdirp(folderName, err => {
 	if (err) {
 		console.error(err);
+
+		process.exit(1);
 	} else {
-		console.log('\n\t ❭ Directory Created 	:'.directory + '	✔'.normal);
+		console.log('Direcotry Created');
 	}
 });
 
-setTimeout(() => {
-	console.log('\n\t ❭ Downloading 		:'.directory + '	✔'.normal);
-}, 2000);
+if (argv.u) {
+	const getImageIn = fs.createWriteStream(folderName + argv.n + '.jpg');
 
-const file = fs.createWriteStream(imageIn + argv.n + '.jpg');
+	http.get('http://graph.facebook.com/' + argv.u + '/picture?width=1600', res => {
+		res.pipe(getImageIn);
 
-setTimeout(() => {
-	console.log('\n\t ❭ In Progress 		:'.directory + '	✔'.normal);
-}, 3500);
-http.get('http://graph.facebook.com/' + argv.u + '/picture?width=1600', res => {
-	res.pipe(file);
-	setTimeout(() => {
-		console.log('\n\t ❭ Image Saved in 	: '.directory + '	' + removeDot.toString().normal + ' ❭❭ ' + argv.n.toString().normal + '.jpg'.normal + '\n');
-	}, 4000);
-}).on('error', err => {
-	process.exit(1);
-	console.error(err);
-});
+		console.log('image saved');
+	}).on('error', err => {
+		console.error(err);
 
+		process.exit(1);
+	});
+}
+
+if (argv.i) {
+	const getUserID = https.request(userID, res => {
+		if (res.statusCode === 200) {
+			console.log('user found');
+		} else {
+			console.log('not done!');
+
+			process.exit(1);
+		}
+
+		let storeData = '';
+
+		res.setEncoding('utf8');
+
+		res.on('data', d => {
+			storeData += d;
+		});
+
+		res.on('end', () => {
+			const matchPattern = new RegExp(/entity_id":"\d*/);
+
+			const arrMatches = storeData.match(matchPattern);
+
+			if (arrMatches && arrMatches[0]) {
+				const getID = arrMatches[0].replace('entity_id":"', '');
+
+				const getImageIn = fs.createWriteStream(folderName + argv.n + '.jpg');
+
+				http.get('http://graph.facebook.com/' + getID + '/picture?width=1600', res => {
+					res.pipe(getImageIn);
+
+					console.log('image saved');
+				}).on('error', err => {
+					console.error(err);
+
+					process.exit(1);
+				});
+			} else {
+				process.exit(1);
+			}
+		});
+	});
+	getUserID.end();
+}
