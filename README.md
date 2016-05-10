@@ -16,9 +16,9 @@ $ npm install --global image-of
 ## Structure
 
 ```
-	$ image-of
+$ image-of
 
-		Usage : image-of -u <command> [info] <command> [file]
+	Usage : image-of -u <command> [info] <command> [file]
 
 Commands:
   u  ❱ facebook user's user-id
@@ -36,6 +36,7 @@ Options:
 $ facebook-id-of -u [user.name]
 	
 	Usage 
+
 		$ facebook-id-of -u zuck
 
 			ZUCK's Facebook ID is 4
