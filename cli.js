@@ -66,6 +66,28 @@ mkdirp(folderName, err => {
 	}
 });
 
+function checkInternet(cb) {
+	require('dns').lookup('facebook.com', err => {
+		if (err && err.code === 'ENOTFOUND') {
+			cb(false);
+		} else {
+			cb(true);
+		}
+	});
+}
+
+// checking internet connection
+checkInternet(isConnected => {
+	if (isConnected) {
+		// do nothing : don't want to show a lot of messages.
+	} else {
+		// stop the whole process if the network is unreachable
+		console.log(colors.red.bold('\n ❱ Internet Connection   :   ✖\n'));
+
+		process.exit(1);
+	}
+});
+
 if (argv.u) {
 	http.get('http://graph.facebook.com/' + argv.u + '/picture?width=1600', res => {
 		if (res.statusCode === 200) {
@@ -93,9 +115,9 @@ if (argv.u) {
 if (argv.i) {
 	const getUserID = https.request(userID, res => {
 		if (res.statusCode === 200) {
-			console.log('user found');
+			console.log(colors.cyan.bold('\n ❱ Facebook user       :   ✔'));
 		} else {
-			console.log('not a facebook user');
+			console.log(colors.red.bold('\n ❱ Facebook user'));
 
 			process.exit(1);
 		}
@@ -121,7 +143,7 @@ if (argv.i) {
 				http.get('http://graph.facebook.com/' + getID + '/picture?width=1600', res => {
 					res.pipe(getImageIn);
 
-					console.log('image saved');
+					console.log(colors.cyan.bold('\n ❱ Image saved in      :  '), colors.green.bold(folderName).replace('./', '').replace('/', ''), colors.cyan.bold('❱'), colors.green.bold(argv.n + `.jpg`, '\n'));
 				}).on('error', err => {
 					console.error(err);
 
