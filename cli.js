@@ -16,9 +16,9 @@ const argv = require('yargs')
 
 .usage(colors.cyan.bold('\nUsage : $0 -u <command> [info] <command> [file]'))
 
-.command('u', colors.cyan.bold('❱ ') + 'facebook user\'s username')
+.command('u', colors.cyan.bold('❱ ') + 'facebook user\'s user-id')
 
-.command('i', colors.cyan.bold('❱ ') + 'facebook user\'s user-id')
+.command('i', colors.cyan.bold('❱ ') + 'facebook user\'s username')
 
 .demand(['n'])
 
@@ -54,7 +54,7 @@ const userID = {
 	}
 };
 
-const folderName = './Image/';
+const folderName = './Images/';
 
 mkdirp(folderName, err => {
 	if (err) {
@@ -62,17 +62,27 @@ mkdirp(folderName, err => {
 
 		process.exit(1);
 	} else {
-		console.log('Direcotry Created');
+		console.log(colors.cyan.bold('\n ❱ Directory Created   :   ✔'));
 	}
 });
 
 if (argv.u) {
-	const getImageIn = fs.createWriteStream(folderName + argv.n + '.jpg');
-
 	http.get('http://graph.facebook.com/' + argv.u + '/picture?width=1600', res => {
-		res.pipe(getImageIn);
+		if (res.statusCode === 200) {
+			const getImageIn = fs.createWriteStream(folderName + argv.n + '.jpg');
 
-		console.log('image saved');
+			res.pipe(getImageIn);
+
+			const saveFile = colors.green.bold(folderName.toString().replace('./', '').replace('/', ''));
+
+			const sendMess = colors.cyan.bold('\n ❱ Image Saved In      : ') + '  ' + saveFile + colors.cyan.bold(' ❱ ') + colors.green.bold(argv.n + `.jpg`, '\n');
+
+			console.log(sendMess);
+		} else {
+			console.log(colors.red.bold('\n ❱ User Found          :   ✖ \n'));
+
+			process.exit(1);
+		}
 	}).on('error', err => {
 		console.error(err);
 
@@ -85,7 +95,7 @@ if (argv.i) {
 		if (res.statusCode === 200) {
 			console.log('user found');
 		} else {
-			console.log('not done!');
+			console.log('not a facebook user');
 
 			process.exit(1);
 		}
