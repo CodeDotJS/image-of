@@ -28,108 +28,101 @@ const argv = require('yargs')
 
 const updateNotifier = require('update-notifier');
 
-const idFinder = {
+const pkg = require('./package.json');
 
-    hostname: 'www.facebook.com',
-
-    port: 443,
-
-    path: '/' + argv.u,
-
-    method: 'GET',
-
-    headers: {
-
-        'accept': 'text/html,application/json,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
-
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36',
-
-        'Host': 'www.facebook.com',
-
-        'Connection': 'Keep-Alive',
-
-        'Accept-Language': 'en-GB,en-US;q=0.8,en;q=0.6'
-    }
-};
+updateNotifier({pkg}).notify();
 
 const userID = {
+	hostname: 'www.facebook.com',
 
-    hostname: 'www.facebook.com',
+	port: 443,
 
-    port: 443,
+	path: '/' + argv.i,
 
-    path: '/' + argv.i,
+	method: 'GET',
 
-    method: 'GET',
+	headers: {
+		'accept': 'text/html,application/json,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
 
-    headers: {
+		'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36',
 
-        'accept': 'text/html,application/json,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8',
+		'Host': 'www.facebook.com',
 
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/46.0.2490.86 Safari/537.36',
+		'Connection': 'Keep-Alive',
 
-        'Host': 'www.facebook.com',
-
-        'Connection': 'Keep-Alive',
-
-        'Accept-Language': 'en-GB,en-US;q=0.8,en;q=0.6'
-
-    }
-
+		'Accept-Language': 'en-GB,en-US;q=0.8,en;q=0.6'
+	}
 };
 
 const folderName = './Image/';
 
 mkdirp(folderName, err => {
-    if (err) {
-        console.error(err);
-        process.exit(1);
-    } else {
-        console.log('Direcotry Created');
-    }
+	if (err) {
+		console.error(err);
+
+		process.exit(1);
+	} else {
+		console.log('Direcotry Created');
+	}
 });
 
 if (argv.i) {
-    const getUserID = https.request(userID, res => {
-        if (res.statusCode === 200) {
-            console.log('user found');
-        } else {
-            console.log('not done!');
+	const getUserID = https.request(userID, res => {
+		if (res.statusCode === 200) {
+			console.log('user found');
+		} else {
+			console.log('not done!');
 
-            process.exit(1);
-        }
+			process.exit(1);
+		}
 
-        let storeData = '';
+		let storeData = '';
 
-        res.setEncoding('utf8');
+		res.setEncoding('utf8');
 
-        res.on('data', d => {
+		res.on('data', d => {
+			storeData += d;
+		});
 
-            storeData += d;
+		res.on('end', () => {
+			const matchPattern = new RegExp(/entity_id":"\d*/);
 
-        });
+			const arrMatches = storeData.match(matchPattern);
 
-        res.on('end', () => {
+			if (arrMatches && arrMatches[0]) {
+				const getID = arrMatches[0].replace('entity_id":"', '');
 
-            const matchPattern = new RegExp(/entity_id":"\d*/);
+				const getImageIn = fs.createWriteStream(folderName + argv.n + '.jpg');
 
-            const arrMatches = storeData.match(matchPattern);
+				http.get('http://graph.facebook.com/' + getID + '/picture?width=1600', res => {
+					res.pipe(getImageIn);
 
-            if (arrMatches && arrMatches[0]) {
-                const getID = arrMatches[0].replace('entity_id":"', '');
+					console.log('image saved');
+				}).on('error', err => {
+					console.error(err);
 
-                const getImageIn = fs.createWriteStream(folderName + argv.n + '.jpg');
-                http.get('http://graph.facebook.com/' + getID +'/picture?width=1600', res => {
-                        res.pipe(getImageIn);
-                        console.log('image saved');
-                    }).on('error', err => {
-                    console.error(err);
-                    process.exit(1);
-                });
-            } else {
-                process.exit(1);
-            }
-        });
-    });
-    getUserID.end();
+					process.exit(1);
+				});
+			} else {
+				process.exit(1);
+			}
+		});
+	});
+	getUserID.end();
+}
+
+if (argv.u) {
+	const getImageIn = fs.createWriteStream(folderName + argv.n + '.jpg');
+
+	http.get('http://graph.facebook.com/' + argv.u + '/picture?width=1600', res => {
+		res.pipe(getImageIn);
+
+		console.log('image saved');
+	}).on('error', err => {
+		console.error(err);
+
+		process.exit(1);
+	});
+} else {
+	process.exit(1);
 }
