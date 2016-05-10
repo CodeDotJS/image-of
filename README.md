@@ -5,8 +5,6 @@
 
 > Download profile picture of any facebook user.
 
-__NOTE__ : Do remeber the facebook user name so that you can find the user id.
-
 ## Install
 
 ```
@@ -15,37 +13,70 @@ $ npm install --global facebook-id-of
 $ npm install --global image-of
 ```
 
-__NOTE__ : You don't need to write any extension for the image you are downloading.
-
-## Usage
+## Structure
 
 ```
-$ facebook-id-of -u [/user.name] [GET THE USER ID]
+	$ image-of
 
-$ image-of -u /USER.ID -n /file.name
+		Usage : image-of -u <command> [info] <command> [file]
 
+Commands:
+  u  ❱ facebook user's user-id
+  i  ❱ facebook user's username
 
-  Usage
+Options:
+  -n  ❱ save image as                              [required]
+```
 
-    $ image-of
+## Start
 
-              Options:
-
-                 -u    user id [obtained from facebook-id-of]  [required]
-
-                 -n    save image as [ unicorn ]               [required]
-
-
-    $ image-of -u '/user.id' -n unicorn 
-
-    	❭ Downloading 			: 	✔
-
-		❭ Directory Created 	:	✔
-
-		❭ Image Saved in 		: 	Images ❭❭ unicorn.jpg
-
+> If you don't know user id of a facebook user 
 
 ```
+$ facebook-id-of -u [user.name]
+	
+	Usage 
+		$ facebook-id-of -u zuck
+
+			ZUCK's Facebook ID is 4
+
+```
+
+## Usage 
+
+__CASE : 1__ : Download profile picture of a facebook user using their username.
+
+```
+$ image-of -i RishiDotJS -n rishi
+
+	❱ Directory Created   :   ✔
+
+	❱ Facebook user       :   ✔
+
+	❱ Image saved in      :   Images ❱ rishi.jpg 
+
+```
+
+__CASE : 2__ : Download profile picture of a facebook user using their userid.
+
+```
+$ image-of -u 4 -n zuck
+	
+	❱ Directory Created   :   ✔
+
+	❱ Image Saved In      :   Images ❱ zuck.jpg 
+```
+
+## Note 
+
+> Don't give any extenion to the filename while downloading image. For example :
+
+```
+	$ image-of -u 4 -n zuck.jpg [ wrong ]
+
+	$ image-of -u 4 -n zuck [ right ]
+```
+
 ## Screenshot
 
 <img src="https://raw.githubusercontent.com/rishigiridotcom/rishigiri.com/17afbe956c70ad6fbb668b14acd371fc3251529e/github/image-of.png" alt="">
