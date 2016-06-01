@@ -1,6 +1,7 @@
 <h1 align="center">
 <img width="330" height="165" src="http://rishigiri.com/github/fbimg.png"></img>
 <br>
+<img src="https://travis-ci.org/CodeDotJS/image-of.svg?branch=master">
 </h1>
 
 > Download profile picture of any facebook user.
