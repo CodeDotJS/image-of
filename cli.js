@@ -12,17 +12,19 @@ const mkdirp = require('mkdirp');
 
 const colors = require('colors/safe');
 
+const arrow = colors.cyan.bold('❱');
+
 const argv = require('yargs')
 
 .usage(colors.cyan.bold('\nUsage : $0 -u <command> [info] <command> [file]'))
 
-.command('u', colors.cyan.bold('❱ ') + 'facebook user\'s user-id')
+.command('u', `${arrow} facebook user's user-id`)
 
-.command('i', colors.cyan.bold('❱ ') + 'facebook user\'s username')
+.command('i', `${arrow} facebook user's username`)
 
 .demand(['n'])
 
-.describe('n', colors.cyan.bold('❱ ') + 'save image as')
+.describe('n', `${arrow} save image as`)
 
 .argv;
 
@@ -32,12 +34,18 @@ const pkg = require('./package.json');
 
 updateNotifier({pkg}).notify();
 
+const argPass = argv.i;
+
+const argSlash = '/';
+
+const concatArgs = `${argSlash}${argPass}`;
+
 const userID = {
 	hostname: 'www.facebook.com',
 
 	port: 443,
 
-	path: '/' + argv.i,
+	path: concatArgs,
 
 	method: 'GET',
 
@@ -88,16 +96,28 @@ checkInternet(isConnected => {
 	}
 });
 
+const userProfile = 'http://graph.facebook.com/';
+
+const userName = argv.u;
+
+const imageSize = '/picture?width=1600';
+
+const finalizedURL = `${userProfile}${userName}${imageSize}`;
+
+const saveArg = argv.n;
+
+const passedArgs = `${saveArg}.jpg`;
+
 if (argv.u) {
-	http.get('http://graph.facebook.com/' + argv.u + '/picture?width=1600', res => {
+	http.get(finalizedURL, res => {
 		if (res.statusCode === 200) {
-			const getImageIn = fs.createWriteStream(folderName + argv.n + '.jpg');
+			const getImageIn = fs.createWriteStream(folderName + passedArgs);
 
 			res.pipe(getImageIn);
 
 			const saveFile = colors.green.bold(folderName.toString().replace('./', '').replace('/', ''));
 
-			const sendMess = colors.cyan.bold('\n ❱ Image Saved In      : ') + '  ' + saveFile + colors.cyan.bold(' ❱ ') + colors.green.bold(argv.n + `.jpg`, '\n');
+			const sendMess = colors.cyan.bold(`\n ❱ Image Saved In      :   ${saveFile} ${arrow} ${saveArg}.jpg\n`);
 
 			console.log(sendMess);
 		} else {
@@ -138,12 +158,24 @@ if (argv.i) {
 			if (arrMatches && arrMatches[0]) {
 				const getID = arrMatches[0].replace('entity_id":"', '');
 
-				const getImageIn = fs.createWriteStream(folderName + argv.n + '.jpg');
+				const userArgs = argv.n;
 
-				http.get('http://graph.facebook.com/' + getID + '/picture?width=1600', res => {
+				const passIt = `${userArgs}.jpg`;
+
+				const getImageIn = fs.createWriteStream(folderName + passIt);
+
+				const initialPart = 'http://graph.facebook.com/';
+
+				const finalPart = '/picture?width=1600';
+
+				const structLink = `${initialPart}${getID}${finalPart}`;
+
+				http.get(structLink, res => {
 					res.pipe(getImageIn);
 
-					console.log(colors.cyan.bold('\n ❱ Image saved in      :  '), colors.green.bold(folderName).replace('./', '').replace('/', ''), colors.cyan.bold('❱'), colors.green.bold(argv.n + `.jpg`, '\n'));
+					const saveFile = colors.green.bold(folderName.toString().replace('./', '').replace('/', ''));
+
+					console.log(colors.cyan.bold(`\n ❱ Image Saved In      :   ${saveFile} ${arrow} ${saveArg}.jpg\n`));
 				}).on('error', err => {
 					console.error(err);
 
