@@ -2,11 +2,11 @@
 
 'use strict';
 
+const fs = require('fs');
+
 const http = require('follow-redirects').http;
 
 const https = require('follow-redirects').https;
-
-const fs = require('fs');
 
 const mkdirp = require('mkdirp');
 

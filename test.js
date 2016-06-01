@@ -1,12 +1,13 @@
 import childProcess from 'child_process';
+
 import test from 'ava';
 
 test.cb(t => {
-	childProcess.execFile('./cli.js', ['-u'], {
+	childProcess.execFile('./cli.js', ['-n anything'], {
 		cwd: __dirname
 	}, (err, stdout) => {
 		t.ifError(err);
-		t.true(stdout.trim().length === 0);
+		t.true(stdout === '\n ❱ Directory Created   :   ✔\n');
 		t.end();
 	});
 });
