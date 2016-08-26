@@ -34,7 +34,6 @@
     "facebook-id-of"
   ],
   "dependencies": {
-    "fs": "*",
     "url": "*",
     "follow-redirects": "*",
     "colors": "*",
