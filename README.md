@@ -1,7 +1,9 @@
 <h1 align="center">
-<img width="330" height="165" src="http://rishigiri.com/github/fbimg.png"></img>
+<br>
+<img width="380" height="125" src="https://raw.githubusercontent.com/CodeDotJS/image-of/master/media/fb.png"></img>
 <br>
 <img src="https://travis-ci.org/CodeDotJS/image-of.svg?branch=master">
+<img src="https://camo.githubusercontent.com/b9d624cb37169bb3e06fd6deddabfff02b5e43be/68747470733a2f2f696d672e736869656c64732e696f2f62616467652f636f64655f7374796c652d584f2d3565643963372e737667">
 </h1>
 
 > Download profile picture of any facebook user.
@@ -9,78 +11,43 @@
 ## Install
 
 ```
-$ npm install --global facebook-id-of
-
 $ npm install --global image-of
 ```
+__`or`__
+```
+$ sudo npm install --global image-of
+```
 
-## Structure
+## Preview
+
+<p align="center">
+<img src="https://raw.githubusercontent.com/CodeDotJS/image-of/master/media/fb.gif">
+</p>
+
+## Usage
 
 ```
 $ image-of
 
-	Usage : image-of -u <command> [info] <command> [file]
+  Download profile picture of any facebook user!
 
-Commands:
-  u  ❱ facebook user's user-id
-  i  ❱ facebook user's username
+  Usage   :  image-of [command] <username/userid>
 
-Options:
-  -n  ❱ save image as                              [required]
-```
+  Command :
+   -i, --id         userid of facebook user
+   -u, --user       username of a facebook user
+   -h, --help       show help
 
-## Start
-
-> If you don't know user id of a facebook user 
-
-```
-$ facebook-id-of -u [user.name]
-	
-	Usage 
-
-		$ facebook-id-of -u zuck
-
-			ZUCK's Facebook ID is 4
+  Example :
+   $ image-of -i 4
+   $ image-of -u zuck
 
 ```
 
-## Usage 
-
-__CASE : 1__ : Download profile picture of a facebook user using their username.
-
-```
-$ image-of -i RishiDotJS -n rishi
-
-	❱ Directory Created   :   ✔
-
-	❱ Facebook user       :   ✔
-
-	❱ Image saved in      :   Images ❱ rishi.jpg 
-
-```
-
-__CASE : 2__ : Download profile picture of a facebook user using their userid.
-
-```
-$ image-of -u 4 -n zuck
-	
-	❱ Directory Created   :   ✔
-
-	❱ Image Saved In      :   Images ❱ zuck.jpg 
-```
-
-## Note 
-
-> Don't give any extenion to the filename while downloading image. For example :
-
-```
-	$ image-of -u 4 -n zuck.jpg [ wrong ]
-
-	$ image-of -u 4 -n zuck [ right ]
-```
+__`NOTE :`__ `Images will be saved in the home directory under Facebook-Image folder`
 
 ## Related
- 
+
  - [instavim](https://github.com/CodeDotJS/instavim) : Complete Instagram media downloader.
 
  - [facebook-id-of](https://github.com/CodeDotJS/facebook-id-of) : Finds facebook user's userid.
