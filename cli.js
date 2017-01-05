@@ -54,10 +54,15 @@ const showMessage = () => {
 	return;
 };
 
+const removeImage = () => {
+	return fs.unlinkSync(`${saveMedia}/${inf}.jpg`);
+};
+
 const checkConnection = () => {
 	dns.lookup('facebook.com', err => {
 		if (err) {
 			logUpdate(`\n${pos} ${dim('Please check your internet connection!')}\n`);
+			removeImage();
 			process.exit(1);
 		}
 		logUpdate();
@@ -109,10 +114,6 @@ const downloadMedia = opts => {
 		});
 	});
 	return;
-};
-
-const removeImage = () => {
-	return fs.unlinkSync(`${saveMedia}/${inf}.jpg`);
 };
 
 if (arg === '-i' || arg === '--id') {
