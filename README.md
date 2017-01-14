@@ -48,13 +48,13 @@ __`NOTE :`__ `Images will be saved in the home directory under Facebook-Image fo
 
 ## Related
 
- - [instavim](https://github.com/CodeDotJS/instavim) : Complete Instagram media downloader.
+ - __[`instavim`](https://github.com/CodeDotJS/instavim)__ `:` `Complete Instagram media downloader.`
 
- - [facebook-id-of](https://github.com/CodeDotJS/facebook-id-of) : Finds facebook user's userid.
+ - __[`facebook-id-of`](https://github.com/CodeDotJS/facebook-id-of)__ `:` `Finds facebook user's userid.`
 
- - [insta-id-of](https://github.com/CodeDotJS/instagram-id-of) : Finds instagram users' userid.
+ - __[`insta-id-of`](https://github.com/CodeDotJS/instagram-id-of)__ `:` `Finds instagram users' userid.`
 
- - [gravatar-of](https://github.com/CodeDotJS/gravatar-of) : Gravatar from command line.
+ - __[`gravatar-of`](https://github.com/CodeDotJS/gravatar-of)__ `:` `Gravatar from command line.`
 
 
 ## License
