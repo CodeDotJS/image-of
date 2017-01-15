@@ -44,7 +44,7 @@ $ image-of
 
 ```
 
-__`NOTE :`__ `Images will be saved in the home directory under Facebook-Image folder`
+__`NOTE :`__ `Images will be` __`saved`__ `in the home directory under` __`Facebook-Image`__ `folder`
 
 ## Related
 
