@@ -23,6 +23,8 @@ const inf = process.argv[3];
 const pre = chalk.cyan.bold('›');
 const pos = chalk.red.bold('›');
 
+const fileName = Math.random().toString(15).substr(4, 8);
+
 const saveMedia = `${os.homedir()}/Facebook-Images/`;
 const graph = `https://graph.facebook.com/${inf}/picture?width=1600`;
 
@@ -55,7 +57,7 @@ const showMessage = () => {
 };
 
 const removeImage = () => {
-	return fs.unlinkSync(`${saveMedia}/${inf}.jpg`);
+	return fs.unlinkSync(`${saveMedia}/${fileName}.jpg`);
 };
 
 const checkConnection = () => {
@@ -91,7 +93,7 @@ if (!arg || arg === '-h' || arg === '--help' || argList.indexOf(arg) === -1) {
 	process.exit(1);
 }
 
-const getIn = fs.createWriteStream(saveMedia + `${inf}.jpg`);
+const getIn = fs.createWriteStream(saveMedia + `${fileName}.jpg`);
 
 const downloadMedia = opts => {
 	opts = opts || {};
